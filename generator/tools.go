@@ -219,6 +219,9 @@ func ParsePackage(pkgPath string) error {
 	)
 	for _, pkg := range pkg {
 		for filePath, tree := range pkg.Files {
+			if strings.HasSuffix(filePath, "_tinyjson.go") {
+				continue
+			}
 			imports := map[string]string{}
 			for _, imp := range tree.Imports {
 				pkgPath, _ := strconv.Unquote(imp.Path.Value)

@@ -144,7 +144,7 @@ func (meta *TypeMeta) buildUnmarshalFunc() {
 	if meta.unmarshalFunc != nil {
 		return
 	}
-	marsh, _ := meta.buildUnmarshalCode(meta.spec.Type, jen.Id("this"), jen.Id(meta.name()), true, false)
+	marsh, _ := meta.buildUnmarshalCode(meta.spec.Type, jen.Id("this"), jen.Id(meta.name()), true, false, false)
 	if marsh != nil {
 		meta.unmarshalFunc = jen.Func().Id(meta.unmarshalFuncName).Call(
 			jen.Id("lex").Op("*").Qual("github.com/tinyjson/lexer", "Lexer"),
@@ -336,7 +336,7 @@ func (meta *TypeMeta) buildMarshalCode(expr ast.Expr, marshalingVariable *jen.St
 	return nil
 }
 
-func (meta *TypeMeta) buildUnmarshalCode(expr ast.Expr, marshalingVariable, marshalingVariableType *jen.Statement, pointer bool, inFor bool) (code, value *jen.Statement) {
+func (meta *TypeMeta) buildUnmarshalCode(expr ast.Expr, marshalingVariable, marshalingVariableType *jen.Statement, pointer bool, inFor bool, retValue bool) (code, value *jen.Statement) {
 	var lvl int
 	variableType, valueLvl := buildTypeDeclaration(expr, meta.imports)
 	expr, lvl = pointerLevel(expr)
@@ -403,6 +403,7 @@ func (meta *TypeMeta) buildUnmarshalCode(expr ast.Expr, marshalingVariable, mars
 		case "int", "int8", "int16", "int32", "int64":
 			varString := Variable()
 			code.List(varString, jen.Err()).Op(":=").Id("lex").Dot("ReadInt").Call().List().Line()
+			code.If(jen.Err().Op("!=").Nil()).Block(jen.Return(jen.Err())).Line()
 			if valueLvl > 0 {
 				code.If(jen.Err().Op("==").Qual("github.com/tinyjson/lexer", "ErrorNilValue")).Block(
 					jen.Err().Op("=").Nil(),
@@ -418,18 +419,32 @@ func (meta *TypeMeta) buildUnmarshalCode(expr ast.Expr, marshalingVariable, mars
 					varString = newVar
 				}
 			}
-			code.Add(unmarshalingValueVariable).Op("=").Add(marshalingVariableType).Call(jen.Add(varString)).Line()
-			code.If(jen.Err().Op("!=").Nil()).Block(jen.Return(jen.Err()))
-		case "uint", "uint8", "uint16", "uint32", "uint64":
+			if retValue {
+				code.Add(unmarshalingValueVariable).Op(":=").Add(marshalingVariableType).Call(jen.Add(varString)).Line()
+				value = unmarshalingValueVariable
+			} else {
+				code.Add(unmarshalingValueVariable).Op("=").Add(marshalingVariableType).Call(jen.Add(varString)).Line()
+			}
+		case "byte", "uint", "uint8", "uint16", "uint32", "uint64":
 			varString := Variable()
 			code = jen.List(varString, jen.Err()).Op(":=").Id("lex").Dot("ReadInt").Call().List().Line()
-			code.Add(unmarshalingValueVariable).Op("=").Add(marshalingVariableType).Call(jen.Add(varString)).Line()
-			code.If(jen.Err().Op("!=").Nil()).Block(jen.Return(jen.Err()))
+			code.If(jen.Err().Op("!=").Nil()).Block(jen.Return(jen.Err())).Line()
+			if retValue {
+				code.Add(unmarshalingValueVariable).Op(":=").Add(marshalingVariableType).Call(jen.Add(varString)).Line()
+				value = unmarshalingValueVariable
+			} else {
+				code.Add(unmarshalingValueVariable).Op("=").Add(marshalingVariableType).Call(jen.Add(varString)).Line()
+			}
 		case "float32", "float64":
 			varString := Variable()
 			code = jen.List(varString, jen.Err()).Op(":=").Id("lex").Dot("ReadFloat").Call().List().Line()
-			code.Add(unmarshalingValueVariable).Op("=").Add(marshalingVariableType).Call(jen.Add(varString)).Line()
-			code.If(jen.Err().Op("!=").Nil()).Block(jen.Return(jen.Err()))
+			code.If(jen.Err().Op("!=").Nil()).Block(jen.Return(jen.Err())).Line()
+			if retValue {
+				code.Add(unmarshalingValueVariable).Op(":=").Add(marshalingVariableType).Call(jen.Add(varString)).Line()
+				value = unmarshalingValueVariable
+			} else {
+				code.Add(unmarshalingValueVariable).Op("=").Add(marshalingVariableType).Call(jen.Add(varString)).Line()
+			}
 		case "bool":
 			varString := Variable()
 			code = jen.List(varString, jen.Err()).Op(":=").Id("lex").Dot("ReadBool").Call().List().Line()
@@ -485,14 +500,14 @@ func (meta *TypeMeta) buildUnmarshalCode(expr ast.Expr, marshalingVariable, mars
 
 		var arrayCode []jen.Code
 
-		arrayCode = append(arrayCode)
+		//arrayCode = append(arrayCode)
 		arrayCode = append(arrayCode, jen.Add(unmarshalingValueVariable).Op("=").Make(variableType, jen.Id("0")))
 
 		arrayCode = append(arrayCode, jen.Id("lex").Dot("Controls").Op("=").Id("lex").Dot("Controls").Index(jen.Id("1"), jen.Empty()))
 		arrayCode = append(arrayCode, jen.Id("lex").Dot("Actions").Op("=").Id("lex").Dot("Actions").Index(jen.Id("4"), jen.Empty()))
 
 		t, _ := buildTypeDeclaration(v.Elt, meta.imports)
-		ccode, variable := meta.buildUnmarshalCode(v.Elt, nil, t, false, true)
+		ccode, variable := meta.buildUnmarshalCode(v.Elt, nil, t, false, true, true)
 
 		arrayCode = append(arrayCode, jen.For().Block(
 			jen.If(jen.Id("lex").Dot("Controls").Index(jen.Id("0")).Op("==").Qual("github.com/tinyjson/lexer", "ArrayOut")).Block(
@@ -548,7 +563,7 @@ func (meta *TypeMeta) buildUnmarshalCode(expr ast.Expr, marshalingVariable, mars
 		}
 
 		t, _ = buildTypeDeclaration(v.Value, meta.imports)
-		ccode, variable := meta.buildUnmarshalCode(v.Value, nil, t, false, true)
+		ccode, variable := meta.buildUnmarshalCode(v.Value, nil, t, false, true, true)
 
 		forBlock = append(forBlock,
 			jen.Id("lex").Dot("Controls").Op("=").Id("lex").Dot("Controls").Index(jen.Id("1"), jen.Empty()),
@@ -591,7 +606,7 @@ func (meta *TypeMeta) buildUnmarshalCode(expr ast.Expr, marshalingVariable, mars
 			field := mp.dic[name]
 			switchValue = append(switchValue, jen.Case(jen.Id(strconv.Quote(name))))
 			marshalingVariableType, _ := buildTypeDeclaration(field.typeExpr, meta.imports)
-			ccode, _ := meta.buildUnmarshalCode(field.typeExpr, field.variableName, marshalingVariableType, false, true)
+			ccode, _ := meta.buildUnmarshalCode(field.typeExpr, field.variableName, marshalingVariableType, false, true, false)
 			switchValue = append(switchValue, ccode)
 		}
 		switchValue = append(switchValue, jen.Default())
