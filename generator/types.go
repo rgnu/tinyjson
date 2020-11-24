@@ -26,7 +26,6 @@ func SetMeta(path string, meta *TypeMeta) {
 }
 
 func Meta(path, name string) *TypeMeta {
-
 	if baseType(name) {
 		path = ""
 	}

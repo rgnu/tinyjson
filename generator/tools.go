@@ -1,6 +1,7 @@
 package generator
 
 import (
+	"bufio"
 	"fmt"
 	"go/ast"
 	"go/parser"
@@ -8,6 +9,7 @@ import (
 	"math/rand"
 	"os"
 	"path"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -107,7 +109,35 @@ var exist = func(dirPath string) bool {
 	return !os.IsNotExist(err)
 }
 
+func closestModulePath(filePath, pkgPath string) string {
+	dir := filepath.Dir(filePath)
+	for dir != "/" {
+		modPath := filepath.Join(dir, "go.mod")
+		if _, err := os.Stat(modPath); err == nil {
+			fp, err := os.Open(modPath)
+			if err != nil {
+				panic("can't open go.mod file")
+			}
+			l, _, err := bufio.NewReader(fp).ReadLine()
+			if err != nil {
+				panic("can't open go.mod file")
+			}
+			modName := strings.Replace(string(l), "module ", "", 1)
+			if strings.HasPrefix(pkgPath, modName) {
+				return path.Join(path.Dir(modPath), strings.TrimPrefix(pkgPath, modName))
+			}
+			return pkgPath
+		}
+		dir = path.Dir(dir)
+	}
+	panic("not found go.mod file")
+}
+
 func resolvePackagePath(filePath, pkgName string) string {
+	modPath := closestModulePath(filePath, pkgName)
+	if exist(modPath) {
+		return modPath
+	}
 	pkgPath := path.Dir(filePath)
 	for {
 		potential := path.Join(pkgPath, "vendor", pkgName)
