@@ -109,35 +109,45 @@ var exist = func(dirPath string) bool {
 	return !os.IsNotExist(err)
 }
 
-func closestModulePath(filePath, pkgPath string) string {
+func closestGoModRoot(filePath string) string {
 	dir := filepath.Dir(filePath)
 	for dir != "/" {
 		modPath := filepath.Join(dir, "go.mod")
 		if _, err := os.Stat(modPath); err == nil {
-			fp, err := os.Open(modPath)
-			if err != nil {
-				panic("can't open go.mod file")
-			}
-			l, _, err := bufio.NewReader(fp).ReadLine()
-			if err != nil {
-				panic("can't open go.mod file")
-			}
-			modName := strings.Replace(string(l), "module ", "", 1)
-			if strings.HasPrefix(pkgPath, modName) {
-				return path.Join(path.Dir(modPath), strings.TrimPrefix(pkgPath, modName))
-			}
-			return pkgPath
+			return dir
 		}
 		dir = path.Dir(dir)
 	}
-	panic("not found go.mod file")
+	return ""
 }
 
-func resolvePackagePath(filePath, pkgName string) string {
-	modPath := closestModulePath(filePath, pkgName)
-	if exist(modPath) {
-		return modPath
+func getGoModName(modPath string) string {
+	fp, err := os.Open(modPath)
+	if err != nil {
+		panic("can't open go.mod file")
 	}
+	l, _, err := bufio.NewReader(fp).ReadLine()
+	fp.Close()
+	if err != nil {
+		panic("can't open go.mod file")
+	}
+	modName := strings.Replace(string(l), "module ", "", 1)
+	return modName
+}
+
+func closestModulePath(filePath, pkgPath string) string {
+	root := closestGoModRoot(filePath)
+	modPath := filepath.Join(root, "go.mod")
+	modName := getGoModName(modPath)
+	if strings.HasPrefix(pkgPath, modName) {
+		return path.Join(root, strings.TrimPrefix(pkgPath, modName))
+	}
+	return pkgPath
+}
+
+var mm = map[string]bool{}
+
+func resolvePackagePath(filePath, pkgName string) string {
 	pkgPath := path.Dir(filePath)
 	for {
 		potential := path.Join(pkgPath, "vendor", pkgName)
@@ -158,14 +168,25 @@ func resolvePackagePath(filePath, pkgName string) string {
 	if exist(potential) {
 		return potential
 	}
+	modPath := closestModulePath(filePath, pkgName)
+	if exist(modPath) {
+		return modPath
+	}
 	return ""
 }
 
 func pkg(filePath string) string {
 	abs := path.Dir(filePath)
+	base := path.Base(abs)
+	root := closestGoModRoot(filePath)
+	modPath := filepath.Join(root, "go.mod")
+	modName := getGoModName(modPath)
+	if strings.HasPrefix(abs, root) {
+		return path.Join(modName, strings.TrimPrefix(abs, root))
+	}
 	var pkg string
 	for abs != "/" {
-		_, base := path.Split(abs)
+		base = path.Base(abs)
 		if base == "vendor" || abs == path.Join(gopath, "src") || abs == path.Join(goroot, "src") {
 			break
 		}

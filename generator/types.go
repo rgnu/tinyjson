@@ -25,13 +25,13 @@ func SetMeta(path string, meta *TypeMeta) {
 	typeDictionary[path+"#"+meta.name()] = meta
 }
 
-func Meta(path, name string) *TypeMeta {
+func Meta(p, name string) *TypeMeta {
 	if baseType(name) {
-		path = ""
+		p = ""
 	}
-	_ = ParsePackage(path)
+	_ = ParsePackage(p)
 
-	meta := typeDictionary[path+"#"+name]
+	meta := typeDictionary[p+"#"+name]
 	return meta
 }
 
