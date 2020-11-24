@@ -93,7 +93,7 @@ func (meta *TypeMeta) pkg() string {
 	abs := meta.pkgPath
 	var pkg string
 	for {
-		base := path.Base(pkg)
+		base := path.Base(abs)
 		if base == "vendor" || abs == path.Join(gopath, "src") || abs == path.Join(goroot, "src") {
 			break
 		}

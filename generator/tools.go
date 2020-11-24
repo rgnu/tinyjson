@@ -134,7 +134,7 @@ func resolvePackagePath(filePath, pkgName string) string {
 func pkg(filePath string) string {
 	abs := path.Dir(filePath)
 	var pkg string
-	for {
+	for abs != "/" {
 		_, base := path.Split(abs)
 		if base == "vendor" || abs == path.Join(gopath, "src") || abs == path.Join(goroot, "src") {
 			break
@@ -188,7 +188,12 @@ func ParsePackage(pkgPath string) error {
 
 				code := generateFuncCode()
 
-				public := strings.Contains(spec.Doc.Text(), "tinyjson:json")
+				public := false
+				if spec.Doc != nil {
+					for _, v := range spec.Doc.List {
+						public = public || strings.Contains(v.Text, "tinyjson:json")
+					}
+				}
 
 				meta := &TypeMeta{
 					spec:              spec,
