@@ -48,7 +48,7 @@ func MetaRel(filePath, pkgName, typeName string) *TypeMeta {
 func baseType(name string) bool {
 	return name == "string" || name == "bool" || name == "float" || name == "float64" ||
 		name == "int" || name == "int8" || name == "int16" || name == "int32" || name == "int64" ||
-		name == "uint" || name == "uint8" || name == "uint16" || name == "uint32" || name == "uint64"
+		name == "byte" || name == "uint" || name == "uint8" || name == "uint16" || name == "uint32" || name == "uint64"
 }
 
 type TypeMeta struct {
@@ -222,7 +222,7 @@ func (meta *TypeMeta) buildMarshalCode(expr ast.Expr, marshalingVariable *jen.St
 			code = code.Id("w").Dot("WriteString").Call(
 				jen.Qual("strconv", "FormatInt").
 					Call(jen.Int64().Call(marshalingValueVariable), jen.Id("10")))
-		case "uint", "uint8", "uint16", "uint32", "uint64":
+		case "byte", "uint", "uint8", "uint16", "uint32", "uint64":
 			code = code.Id("w").Dot("WriteString").Call(
 				jen.Qual("strconv", "FormatUint").
 					Call(jen.Uint64().Call(marshalingValueVariable), jen.Id("10")))
@@ -271,60 +271,43 @@ func (meta *TypeMeta) buildMarshalCode(expr ast.Expr, marshalingVariable *jen.St
 		}
 		return
 	case *ast.ArrayType:
-		var breakSt *jen.Statement
-		if inFor {
-			breakSt = jen.Break()
-		} else {
-			breakSt = jen.Return()
-		}
 		code = code.If(marshalingValueVariable.Clone().Op("==").Nil()).Block(
 			jen.Id("w").Dot("WriteString").Call(jen.Id(`"null"`)),
-			breakSt,
-		).Line()
-
-		//fmt.Printf("array: %#v %#v\n", v.Elt, v.Len)
-		varI := Variable()
-		varV := Variable()
-
-		code = code.Id("w").Dot("WriteString").Call(jen.Id(`"["`)).Line()
-		code = code.For(jen.List(varI, varV).Op(":=").Range().Add(marshalingValueVariable)).Block(
-			jen.If(varI.Clone().Op(">").Id("0")).Block(
-				jen.Id("w").Dot("WriteString").Call(jen.Id(`","`)),
-			),
-			meta.buildMarshalCode(v.Elt, varV, false, true),
-		).Line()
-		code = code.Id("w").Dot("WriteString").Call(jen.Id(`"]"`))
+		).Else().BlockFunc(func(g *jen.Group) {
+			//fmt.Printf("array: %#v %#v\n", v.Elt, v.Len)
+			varI := Variable()
+			varV := Variable()
+			g.Id("w").Dot("WriteString").Call(jen.Id(`"["`))
+			g.For(jen.List(varI, varV).Op(":=").Range().Add(marshalingValueVariable)).Block(
+				jen.If(varI.Clone().Op(">").Id("0")).Block(
+					jen.Id("w").Dot("WriteString").Call(jen.Id(`","`)),
+				),
+				meta.buildMarshalCode(v.Elt, varV, false, true),
+			)
+			g.Id("w").Dot("WriteString").Call(jen.Id(`"]"`))
+		})
 		return code
 	case *ast.MapType:
-		var breakSt *jen.Statement
-		if inFor {
-			breakSt = jen.Break()
-		} else {
-			breakSt = jen.Return()
-		}
 		code = code.If(marshalingValueVariable.Clone().Op("==").Nil()).Block(
 			jen.Id("w").Dot("WriteString").Call(jen.Id(`"null"`)),
-			breakSt,
-		).Line()
-
-		varKey := Variable()
-		varVal := Variable()
-
-		varNotFirst := Variable()
-
-		code = code.Var().Add(varNotFirst).Bool().Line()
-		code = code.Id("w").Dot("WriteString").Call(jen.Id(`"{"`)).Line()
-		code = code.For(jen.List(varKey, varVal)).Op(":=").Range().Add(marshalingValueVariable).Block(
-			jen.If(varNotFirst).Block(
-				jen.Id("w").Dot("WriteString").Call(jen.Id(`","`)),
-			).Else().Block(
-				varNotFirst.Clone().Op("=").True(),
-			),
-			buildMapKey(varKey, v.Key),
-			jen.Id("w").Dot("WriteString").Call(jen.Id(`":"`)),
-			meta.buildMarshalCode(v.Value, varVal, false, true),
-		).Line()
-		code = code.Id("w").Dot("WriteString").Call(jen.Id(`"}"`))
+		).Else().BlockFunc(func(g *jen.Group) {
+			varKey := Variable()
+			varVal := Variable()
+			varNotFirst := Variable()
+			g.Var().Add(varNotFirst).Bool()
+			g.Id("w").Dot("WriteString").Call(jen.Id(`"{"`))
+			g.For(jen.List(varKey, varVal)).Op(":=").Range().Add(marshalingValueVariable).Block(
+				jen.If(varNotFirst).Block(
+					jen.Id("w").Dot("WriteString").Call(jen.Id(`","`)),
+				).Else().Block(
+					varNotFirst.Clone().Op("=").True(),
+				),
+				buildMapKey(varKey, v.Key),
+				jen.Id("w").Dot("WriteString").Call(jen.Id(`":"`)),
+				meta.buildMarshalCode(v.Value, varVal, false, true),
+			)
+			g.Id("w").Dot("WriteString").Call(jen.Id(`"}"`))
+		})
 		return code
 	case *ast.StructType:
 		code = code.Id("w").Dot("WriteString").Call(jen.Id(`"{"`))
