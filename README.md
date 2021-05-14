@@ -13,8 +13,8 @@ It is in alpha. Almost everything works. Interfaces not supported yet. Feel free
 
 ## How to use it
 ```bash
-go get github.com/tinyjson/tinyjson
-go install github.com/tinyjson/tinyjson
+go get github.com/rgnu/tinyjson
+go install github.com/rgnu/tinyjson
 ```
 
 add this comment somewhere in library

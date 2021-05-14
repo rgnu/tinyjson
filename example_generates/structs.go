@@ -1,8 +1,8 @@
 package example_generates
 
 import (
-	"github.com/tinyjson/tinyjson/example_generates/external_lib"
-	al "github.com/tinyjson/tinyjson/example_generates/external_lib"
+	"github.com/rgnu/tinyjson/example_generates/external_lib"
+	al "github.com/rgnu/tinyjson/example_generates/external_lib"
 )
 
 type (

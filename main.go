@@ -2,9 +2,10 @@ package main
 
 import (
 	"flag"
+	"log"
 	"path/filepath"
 
-	"github.com/tinyjson/tinyjson/generator"
+	"github.com/rgnu/tinyjson/generator"
 	//frontend "gitlab.com/sud-ua/parser/models/frontend"
 	//"gitlab.com/sud-ua/parser/models/frontend/structs"
 )
@@ -21,6 +22,7 @@ func main() {
 
 	for _, pkg := range extra {
 		pkg, _ = filepath.Abs(pkg)
+		log.Println("Parsing file", pkg)
 		if err := generator.ParsePackage(pkg); err != nil {
 			panic(err)
 		}
