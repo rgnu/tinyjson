@@ -1,6 +1,7 @@
 package generator
 
 import (
+	"bufio"
 	"fmt"
 	"go/ast"
 	"go/parser"
@@ -8,6 +9,7 @@ import (
 	"math/rand"
 	"os"
 	"path"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -107,6 +109,44 @@ var exist = func(dirPath string) bool {
 	return !os.IsNotExist(err)
 }
 
+func closestGoModRoot(filePath string) string {
+	dir := filepath.Dir(filePath)
+	for dir != "/" {
+		modPath := filepath.Join(dir, "go.mod")
+		if _, err := os.Stat(modPath); err == nil {
+			return dir
+		}
+		dir = path.Dir(dir)
+	}
+	return ""
+}
+
+func getGoModName(modPath string) string {
+	fp, err := os.Open(modPath)
+	if err != nil {
+		panic("can't open go.mod file")
+	}
+	l, _, err := bufio.NewReader(fp).ReadLine()
+	fp.Close()
+	if err != nil {
+		panic("can't open go.mod file")
+	}
+	modName := strings.Replace(string(l), "module ", "", 1)
+	return modName
+}
+
+func closestModulePath(filePath, pkgPath string) string {
+	root := closestGoModRoot(filePath)
+	modPath := filepath.Join(root, "go.mod")
+	modName := getGoModName(modPath)
+	if strings.HasPrefix(pkgPath, modName) {
+		return path.Join(root, strings.TrimPrefix(pkgPath, modName))
+	}
+	return pkgPath
+}
+
+var mm = map[string]bool{}
+
 func resolvePackagePath(filePath, pkgName string) string {
 	pkgPath := path.Dir(filePath)
 	for {
@@ -128,14 +168,25 @@ func resolvePackagePath(filePath, pkgName string) string {
 	if exist(potential) {
 		return potential
 	}
+	modPath := closestModulePath(filePath, pkgName)
+	if exist(modPath) {
+		return modPath
+	}
 	return ""
 }
 
 func pkg(filePath string) string {
 	abs := path.Dir(filePath)
+	base := path.Base(abs)
+	root := closestGoModRoot(filePath)
+	modPath := filepath.Join(root, "go.mod")
+	modName := getGoModName(modPath)
+	if strings.HasPrefix(abs, root) {
+		return path.Join(modName, strings.TrimPrefix(abs, root))
+	}
 	var pkg string
-	for {
-		_, base := path.Split(abs)
+	for abs != "/" {
+		base = path.Base(abs)
 		if base == "vendor" || abs == path.Join(gopath, "src") || abs == path.Join(goroot, "src") {
 			break
 		}
@@ -168,6 +219,9 @@ func ParsePackage(pkgPath string) error {
 	)
 	for _, pkg := range pkg {
 		for filePath, tree := range pkg.Files {
+			if strings.HasSuffix(filePath, "_tinyjson.go") {
+				continue
+			}
 			imports := map[string]string{}
 			for _, imp := range tree.Imports {
 				pkgPath, _ := strconv.Unquote(imp.Path.Value)
@@ -188,7 +242,12 @@ func ParsePackage(pkgPath string) error {
 
 				code := generateFuncCode()
 
-				public := strings.Contains(spec.Doc.Text(), "tinyjson:json")
+				public := false
+				if spec.Doc != nil {
+					for _, v := range spec.Doc.List {
+						public = public || strings.Contains(v.Text, "tinyjson:json")
+					}
+				}
 
 				meta := &TypeMeta{
 					spec:              spec,
