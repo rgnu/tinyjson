@@ -2,8 +2,8 @@ package example_generates
 
 import (
 	"bytes"
+	externallib "github.com/rgnu/tinyjson/example_generates/external_lib"
 	lexer "github.com/tinyjson/lexer"
-	externallib "github.com/tinyjson/tinyjson/example_generates/external_lib"
 	"strconv"
 )
 
@@ -35,11 +35,11 @@ func tinyjsonUnmarshalC39f6f78a15d523b(lex *lexer.Lexer, this *externallib.Exter
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "Key":
-				v107, err := lex.ReadString()
+				v105, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.Key = (string)(v107)
+				this.Key = (string)(v105)
 
 			default:
 				lex.SkipValue()
@@ -49,7 +49,7 @@ func tinyjsonUnmarshalC39f6f78a15d523b(lex *lexer.Lexer, this *externallib.Exter
 	return nil
 }
 
-func tinyjsonMarshalC56ec3f2525632186(w *bytes.Buffer, this *AnonymousAnonymousStruct) {
+func tinyjsonMarshalC55104dc76695721d(w *bytes.Buffer, this *AnonymousAnonymousStruct) {
 	w.WriteString("{")
 	w.WriteString("\"Key1\":")
 	w.WriteString(strconv.Quote(string(this.AnonymousStruct.SimpleStruct.Key1)))
@@ -65,7 +65,7 @@ func tinyjsonMarshalC56ec3f2525632186(w *bytes.Buffer, this *AnonymousAnonymousS
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC56ec3f2525632186(lex *lexer.Lexer, this *AnonymousAnonymousStruct) error {
+func tinyjsonUnmarshalC55104dc76695721d(lex *lexer.Lexer, this *AnonymousAnonymousStruct) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -86,32 +86,32 @@ func tinyjsonUnmarshalC56ec3f2525632186(lex *lexer.Lexer, this *AnonymousAnonymo
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "Key1":
-				v111, err := lex.ReadString()
+				v3, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.AnonymousStruct.SimpleStruct.Key1 = (string)(v111)
+				this.AnonymousStruct.SimpleStruct.Key1 = (string)(v3)
 
 			case "Key2":
-				v113, err := lex.ReadString()
+				v5, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.AnonymousStruct.SimpleStruct.Key2 = (string)(v113)
+				this.AnonymousStruct.SimpleStruct.Key2 = (string)(v5)
 
 			case "Key3":
-				v115, err := lex.ReadString()
+				v7, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.AnonymousStruct.Key3 = (string)(v115)
+				this.AnonymousStruct.Key3 = (string)(v7)
 
 			case "Key4":
-				v117, err := lex.ReadString()
+				v9, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.Key4 = (string)(v117)
+				this.Key4 = (string)(v9)
 
 			default:
 				lex.SkipValue()
@@ -123,17 +123,17 @@ func tinyjsonUnmarshalC56ec3f2525632186(lex *lexer.Lexer, this *AnonymousAnonymo
 
 func (this *AnonymousAnonymousStruct) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC56ec3f2525632186(w, this)
+	tinyjsonMarshalC55104dc76695721d(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *AnonymousAnonymousStruct) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC56ec3f2525632186(lex, this)
+	return tinyjsonUnmarshalC55104dc76695721d(lex, this)
 }
 
-func tinyjsonMarshalC57e9d1860d1d68d8(w *bytes.Buffer, this *AnonymousStruct) {
+func tinyjsonMarshalC6054502fc5d6d268(w *bytes.Buffer, this *AnonymousStruct) {
 	w.WriteString("{")
 	w.WriteString("\"Key1\":")
 	w.WriteString(strconv.Quote(string(this.SimpleStruct.Key1)))
@@ -146,7 +146,7 @@ func tinyjsonMarshalC57e9d1860d1d68d8(w *bytes.Buffer, this *AnonymousStruct) {
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC57e9d1860d1d68d8(lex *lexer.Lexer, this *AnonymousStruct) error {
+func tinyjsonUnmarshalC6054502fc5d6d268(lex *lexer.Lexer, this *AnonymousStruct) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -167,25 +167,25 @@ func tinyjsonUnmarshalC57e9d1860d1d68d8(lex *lexer.Lexer, this *AnonymousStruct)
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "Key1":
-				v59, err := lex.ReadString()
+				v58, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.SimpleStruct.Key1 = (string)(v59)
+				this.SimpleStruct.Key1 = (string)(v58)
 
 			case "Key2":
-				v61, err := lex.ReadString()
+				v60, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.SimpleStruct.Key2 = (string)(v61)
+				this.SimpleStruct.Key2 = (string)(v60)
 
 			case "Key3":
-				v63, err := lex.ReadString()
+				v62, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.Key3 = (string)(v63)
+				this.Key3 = (string)(v62)
 
 			default:
 				lex.SkipValue()
@@ -197,43 +197,43 @@ func tinyjsonUnmarshalC57e9d1860d1d68d8(lex *lexer.Lexer, this *AnonymousStruct)
 
 func (this *AnonymousStruct) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC57e9d1860d1d68d8(w, this)
+	tinyjsonMarshalC6054502fc5d6d268(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *AnonymousStruct) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC57e9d1860d1d68d8(lex, this)
+	return tinyjsonUnmarshalC6054502fc5d6d268(lex, this)
 }
 
-func tinyjsonMarshalC68255aaf95e94627(w *bytes.Buffer, this *DoubleArray) {
+func tinyjsonMarshalC2e3108dabb158644(w *bytes.Buffer, this *DoubleArray) {
 	if *this == nil {
 		w.WriteString("null")
-		return
-	}
-	w.WriteString("[")
-	for v64, v65 := range *this {
-		if v64 > 0 {
-			w.WriteString(",")
-		}
-		if v65 == nil {
-			w.WriteString("null")
-			break
-		}
+	} else {
 		w.WriteString("[")
-		for v66, v67 := range v65 {
-			if v66 > 0 {
+		for v107, v108 := range *this {
+			if v107 > 0 {
 				w.WriteString(",")
 			}
-			w.WriteString(strconv.Quote(string(v67)))
+			if v108 == nil {
+				w.WriteString("null")
+			} else {
+				w.WriteString("[")
+				for v109, v110 := range v108 {
+					if v109 > 0 {
+						w.WriteString(",")
+					}
+					w.WriteString(strconv.Quote(string(v110)))
+				}
+				w.WriteString("]")
+			}
 		}
 		w.WriteString("]")
 	}
-	w.WriteString("]")
 }
 
-func tinyjsonUnmarshalC68255aaf95e94627(lex *lexer.Lexer, this *DoubleArray) error {
+func tinyjsonUnmarshalC2e3108dabb158644(lex *lexer.Lexer, this *DoubleArray) error {
 	if lex.Controls[0] == lexer.Nil {
 		*this = nil
 		lex.Controls = lex.Controls[1:]
@@ -250,15 +250,15 @@ func tinyjsonUnmarshalC68255aaf95e94627(lex *lexer.Lexer, this *DoubleArray) err
 
 				break
 			}
-			var v69 []string
+			var v112 []string
 			if lex.Controls[0] == lexer.Nil {
-				v69 = nil
+				v112 = nil
 				lex.Controls = lex.Controls[1:]
 			} else if lex.Controls[0] != lexer.ArrayIn {
 				lex.SkipValue()
 				return lexer.ErrorUnexpectedType
 			} else {
-				v69 = make([]string, 0)
+				v112 = make([]string, 0)
 				lex.Controls = lex.Controls[1:]
 				lex.Actions = lex.Actions[4:]
 				for {
@@ -267,16 +267,16 @@ func tinyjsonUnmarshalC68255aaf95e94627(lex *lexer.Lexer, this *DoubleArray) err
 
 						break
 					}
-					v71, err := lex.ReadString()
+					v114, err := lex.ReadString()
 					if err != nil {
 						return err
 					}
 
-					v69 = append(v69, string(v71))
+					v112 = append(v112, string(v114))
 				}
 			}
 
-			*this = append(*this, v69)
+			*this = append(*this, v112)
 		}
 	}
 
@@ -285,17 +285,17 @@ func tinyjsonUnmarshalC68255aaf95e94627(lex *lexer.Lexer, this *DoubleArray) err
 
 func (this *DoubleArray) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC68255aaf95e94627(w, this)
+	tinyjsonMarshalC2e3108dabb158644(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *DoubleArray) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC68255aaf95e94627(lex, this)
+	return tinyjsonUnmarshalC2e3108dabb158644(lex, this)
 }
 
-func tinyjsonMarshalC1408d2ac22c4d294(w *bytes.Buffer, this *IntPtr) {
+func tinyjsonMarshalC30b95ff183c471d4(w *bytes.Buffer, this *IntPtr) {
 	if *this == nil {
 		w.WriteString("null")
 		return
@@ -304,8 +304,11 @@ func tinyjsonMarshalC1408d2ac22c4d294(w *bytes.Buffer, this *IntPtr) {
 	w.WriteString(strconv.FormatInt(int64(*v125), 10))
 }
 
-func tinyjsonUnmarshalC1408d2ac22c4d294(lex *lexer.Lexer, this *IntPtr) error {
+func tinyjsonUnmarshalC30b95ff183c471d4(lex *lexer.Lexer, this *IntPtr) error {
 	v127, err := lex.ReadInt()
+	if err != nil {
+		return err
+	}
 	if err == lexer.ErrorNilValue {
 		err = nil
 		*this = nil
@@ -314,64 +317,63 @@ func tinyjsonUnmarshalC1408d2ac22c4d294(lex *lexer.Lexer, this *IntPtr) error {
 	v128 := int(v127)
 	v129 := &v128
 	*this = IntPtr(v129)
-	if err != nil {
-		return err
-	}
+
 	return nil
 }
 
-func tinyjsonMarshalCc697f48392907a0(w *bytes.Buffer, this *IntPtrPtr) {
+func tinyjsonMarshalC1b6cffa2ba517936(w *bytes.Buffer, this *IntPtrPtr) {
 	if *this == nil {
 		w.WriteString("null")
 		return
 	}
-	v1 := *this
-	if *v1 == nil {
+	v71 := *this
+	if *v71 == nil {
 		w.WriteString("null")
 		return
 	}
-	v2 := *v1
-	w.WriteString(strconv.FormatInt(int64(*v2), 10))
+	v72 := *v71
+	w.WriteString(strconv.FormatInt(int64(*v72), 10))
 }
 
-func tinyjsonUnmarshalCc697f48392907a0(lex *lexer.Lexer, this *IntPtrPtr) error {
-	v4, err := lex.ReadInt()
+func tinyjsonUnmarshalC1b6cffa2ba517936(lex *lexer.Lexer, this *IntPtrPtr) error {
+	v74, err := lex.ReadInt()
+	if err != nil {
+		return err
+	}
 	if err == lexer.ErrorNilValue {
 		err = nil
 		*this = nil
 		return nil
 	}
-	v5 := int(v4)
-	v6 := &v5
-	v7 := &v6
-	*this = IntPtrPtr(v7)
-	if err != nil {
-		return err
-	}
+	v75 := int(v74)
+	v76 := &v75
+	v77 := &v76
+	*this = IntPtrPtr(v77)
+
 	return nil
 }
 
-func tinyjsonMarshalC1b6cffa2ba517936(w *bytes.Buffer, this *MapFloatString) {
+func tinyjsonMarshalC430c8b35bb9457d8(w *bytes.Buffer, this *MapFloatString) {
 	if *this == nil {
 		w.WriteString("null")
-		return
-	}
-	var v47 bool
-	w.WriteString("{")
-	for v45, v46 := range *this {
-		if v47 {
-			w.WriteString(",")
-		} else {
-			v47 = true
+	} else {
+		var v30 bool
+		w.WriteString("{")
+		for v28, v29 := range *this {
+			if v30 {
+				w.WriteString(",")
+			} else {
+				v30 = true
+			}
+			w.WriteString("\"" + strconv.FormatFloat(float64(v28), 'g', -1, 64) + "\"")
+			w.WriteString(":")
+			w.WriteString(strconv.Quote(string(v29)))
 		}
-		w.WriteString("\"" + strconv.FormatFloat(float64(v45), 'g', -1, 64) + "\"")
-		w.WriteString(":")
-		w.WriteString(strconv.Quote(string(v46)))
+		w.WriteString("}")
 	}
-	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC1b6cffa2ba517936(lex *lexer.Lexer, this *MapFloatString) error {
+func tinyjsonUnmarshalC430c8b35bb9457d8(lex *lexer.Lexer, this *MapFloatString) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		*this = nil
@@ -387,16 +389,16 @@ func tinyjsonUnmarshalC1b6cffa2ba517936(lex *lexer.Lexer, this *MapFloatString) 
 				lex.Controls = lex.Controls[1:]
 				break
 			}
-			v49, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
-			v50, _ := strconv.ParseFloat(v49, 64)
+			v32, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
+			v33, _ := strconv.ParseFloat(v32, 64)
 			lex.Controls = lex.Controls[1:]
 			lex.Actions = lex.Actions[2:]
-			v52, err := lex.ReadString()
+			v35, err := lex.ReadString()
 			if err != nil {
 				return err
 			}
 
-			(*this)[float64(v50)] = string(v52)
+			(*this)[float64(v33)] = string(v35)
 		}
 	}
 	return nil
@@ -404,37 +406,37 @@ func tinyjsonUnmarshalC1b6cffa2ba517936(lex *lexer.Lexer, this *MapFloatString) 
 
 func (this *MapFloatString) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC1b6cffa2ba517936(w, this)
+	tinyjsonMarshalC430c8b35bb9457d8(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MapFloatString) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC1b6cffa2ba517936(lex, this)
+	return tinyjsonUnmarshalC430c8b35bb9457d8(lex, this)
 }
 
-func tinyjsonMarshalC866cb397916001e(w *bytes.Buffer, this *MapIntString) {
+func tinyjsonMarshalC25845c95d4491d1b(w *bytes.Buffer, this *MapIntString) {
 	if *this == nil {
 		w.WriteString("null")
-		return
-	}
-	var v93 bool
-	w.WriteString("{")
-	for v91, v92 := range *this {
-		if v93 {
-			w.WriteString(",")
-		} else {
-			v93 = true
+	} else {
+		var v12 bool
+		w.WriteString("{")
+		for v10, v11 := range *this {
+			if v12 {
+				w.WriteString(",")
+			} else {
+				v12 = true
+			}
+			w.WriteString("\"" + strconv.FormatInt(int64(v10), 10) + "\"")
+			w.WriteString(":")
+			w.WriteString(strconv.Quote(string(v11)))
 		}
-		w.WriteString("\"" + strconv.FormatInt(int64(v91), 10) + "\"")
-		w.WriteString(":")
-		w.WriteString(strconv.Quote(string(v92)))
+		w.WriteString("}")
 	}
-	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC866cb397916001e(lex *lexer.Lexer, this *MapIntString) error {
+func tinyjsonUnmarshalC25845c95d4491d1b(lex *lexer.Lexer, this *MapIntString) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		*this = nil
@@ -450,16 +452,16 @@ func tinyjsonUnmarshalC866cb397916001e(lex *lexer.Lexer, this *MapIntString) err
 				lex.Controls = lex.Controls[1:]
 				break
 			}
-			v95, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
-			v96, _ := strconv.ParseInt(v95, 10, 64)
+			v14, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
+			v15, _ := strconv.ParseInt(v14, 10, 64)
 			lex.Controls = lex.Controls[1:]
 			lex.Actions = lex.Actions[2:]
-			v98, err := lex.ReadString()
+			v17, err := lex.ReadString()
 			if err != nil {
 				return err
 			}
 
-			(*this)[int(v96)] = string(v98)
+			(*this)[int(v15)] = string(v17)
 		}
 	}
 	return nil
@@ -467,50 +469,50 @@ func tinyjsonUnmarshalC866cb397916001e(lex *lexer.Lexer, this *MapIntString) err
 
 func (this *MapIntString) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC866cb397916001e(w, this)
+	tinyjsonMarshalC25845c95d4491d1b(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MapIntString) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC866cb397916001e(lex, this)
+	return tinyjsonUnmarshalC25845c95d4491d1b(lex, this)
 }
 
 func tinyjsonMarshalC490bd268b68e6a3f(w *bytes.Buffer, this *MapMap) {
 	if *this == nil {
 		w.WriteString("null")
-		return
-	}
-	var v74 bool
-	w.WriteString("{")
-	for v72, v73 := range *this {
-		if v74 {
-			w.WriteString(",")
-		} else {
-			v74 = true
-		}
-		w.WriteString(strconv.Quote(string(v72)))
-		w.WriteString(":")
-		if v73 == nil {
-			w.WriteString("null")
-			break
-		}
-		var v77 bool
+	} else {
+		var v85 bool
 		w.WriteString("{")
-		for v75, v76 := range v73 {
-			if v77 {
+		for v83, v84 := range *this {
+			if v85 {
 				w.WriteString(",")
 			} else {
-				v77 = true
+				v85 = true
 			}
-			w.WriteString(strconv.Quote(string(v75)))
+			w.WriteString(strconv.Quote(string(v83)))
 			w.WriteString(":")
-			w.WriteString(strconv.Quote(string(v76)))
+			if v84 == nil {
+				w.WriteString("null")
+			} else {
+				var v88 bool
+				w.WriteString("{")
+				for v86, v87 := range v84 {
+					if v88 {
+						w.WriteString(",")
+					} else {
+						v88 = true
+					}
+					w.WriteString(strconv.Quote(string(v86)))
+					w.WriteString(":")
+					w.WriteString(strconv.Quote(string(v87)))
+				}
+				w.WriteString("}")
+			}
 		}
 		w.WriteString("}")
 	}
-	w.WriteString("}")
 }
 
 func tinyjsonUnmarshalC490bd268b68e6a3f(lex *lexer.Lexer, this *MapMap) error {
@@ -529,37 +531,37 @@ func tinyjsonUnmarshalC490bd268b68e6a3f(lex *lexer.Lexer, this *MapMap) error {
 				lex.Controls = lex.Controls[1:]
 				break
 			}
-			v79, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
+			v90, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
 			lex.Controls = lex.Controls[1:]
 			lex.Actions = lex.Actions[2:]
-			v80 := map[string]string{}
+			v91 := map[string]string{}
 			data := lex.Data()
 			if lex.Controls[0] == lexer.Nil {
-				v80 = nil
+				v91 = nil
 				lex.Controls = lex.Controls[1:]
 			} else if lex.Controls[0] != lexer.ObjectIn {
 				lex.SkipValue()
 			} else {
 				lex.Controls = lex.Controls[1:]
 				lex.Actions = lex.Actions[4:]
-				v80 = make(map[string]string, 0)
+				v91 = make(map[string]string, 0)
 				for {
 					if lex.Controls[0] == lexer.ObjectOut {
 						lex.Controls = lex.Controls[1:]
 						break
 					}
-					v81, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
+					v92, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
 					lex.Controls = lex.Controls[1:]
 					lex.Actions = lex.Actions[2:]
-					v83, err := lex.ReadString()
+					v94, err := lex.ReadString()
 					if err != nil {
 						return err
 					}
 
-					v80[v81] = string(v83)
+					v91[v92] = string(v94)
 				}
 			}
-			(*this)[v79] = v80
+			(*this)[v90] = v91
 		}
 	}
 	return nil
@@ -577,27 +579,27 @@ func (this *MapMap) UnmarshalJSON(data []byte) error {
 	return tinyjsonUnmarshalC490bd268b68e6a3f(lex, this)
 }
 
-func tinyjsonMarshalC592e17f7b068d9db(w *bytes.Buffer, this *MapStringString) {
+func tinyjsonMarshalC78629a0f5f3f164f(w *bytes.Buffer, this *MapStringString) {
 	if *this == nil {
 		w.WriteString("null")
-		return
-	}
-	var v27 bool
-	w.WriteString("{")
-	for v25, v26 := range *this {
-		if v27 {
-			w.WriteString(",")
-		} else {
-			v27 = true
+	} else {
+		var v117 bool
+		w.WriteString("{")
+		for v115, v116 := range *this {
+			if v117 {
+				w.WriteString(",")
+			} else {
+				v117 = true
+			}
+			w.WriteString(strconv.Quote(string(v115)))
+			w.WriteString(":")
+			w.WriteString(strconv.Quote(string(v116)))
 		}
-		w.WriteString(strconv.Quote(string(v25)))
-		w.WriteString(":")
-		w.WriteString(strconv.Quote(string(v26)))
+		w.WriteString("}")
 	}
-	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC592e17f7b068d9db(lex *lexer.Lexer, this *MapStringString) error {
+func tinyjsonUnmarshalC78629a0f5f3f164f(lex *lexer.Lexer, this *MapStringString) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		*this = nil
@@ -613,15 +615,15 @@ func tinyjsonUnmarshalC592e17f7b068d9db(lex *lexer.Lexer, this *MapStringString)
 				lex.Controls = lex.Controls[1:]
 				break
 			}
-			v29, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
+			v119, _ := strconv.Unquote(string(data[lex.Actions[0]:lex.Actions[1]]))
 			lex.Controls = lex.Controls[1:]
 			lex.Actions = lex.Actions[2:]
-			v31, err := lex.ReadString()
+			v121, err := lex.ReadString()
 			if err != nil {
 				return err
 			}
 
-			(*this)[v29] = string(v31)
+			(*this)[v119] = string(v121)
 		}
 	}
 	return nil
@@ -629,32 +631,32 @@ func tinyjsonUnmarshalC592e17f7b068d9db(lex *lexer.Lexer, this *MapStringString)
 
 func (this *MapStringString) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC592e17f7b068d9db(w, this)
+	tinyjsonMarshalC78629a0f5f3f164f(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MapStringString) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC592e17f7b068d9db(lex, this)
+	return tinyjsonUnmarshalC78629a0f5f3f164f(lex, this)
 }
 
-func tinyjsonMarshalC365a858149c6e2d1(w *bytes.Buffer, this *MyArray) {
+func tinyjsonMarshalC866cb397916001e(w *bytes.Buffer, this *MyArray) {
 	if *this == nil {
 		w.WriteString("null")
-		return
-	}
-	w.WriteString("[")
-	for v86, v87 := range *this {
-		if v86 > 0 {
-			w.WriteString(",")
+	} else {
+		w.WriteString("[")
+		for v36, v37 := range *this {
+			if v36 > 0 {
+				w.WriteString(",")
+			}
+			w.WriteString(strconv.Quote(string(v37)))
 		}
-		w.WriteString(strconv.Quote(string(v87)))
+		w.WriteString("]")
 	}
-	w.WriteString("]")
 }
 
-func tinyjsonUnmarshalC365a858149c6e2d1(lex *lexer.Lexer, this *MyArray) error {
+func tinyjsonUnmarshalC866cb397916001e(lex *lexer.Lexer, this *MyArray) error {
 	if lex.Controls[0] == lexer.Nil {
 		*this = nil
 		lex.Controls = lex.Controls[1:]
@@ -671,12 +673,12 @@ func tinyjsonUnmarshalC365a858149c6e2d1(lex *lexer.Lexer, this *MyArray) error {
 
 				break
 			}
-			v90, err := lex.ReadString()
+			v40, err := lex.ReadString()
 			if err != nil {
 				return err
 			}
 
-			*this = append(*this, string(v90))
+			*this = append(*this, string(v40))
 		}
 	}
 
@@ -685,181 +687,184 @@ func tinyjsonUnmarshalC365a858149c6e2d1(lex *lexer.Lexer, this *MyArray) error {
 
 func (this *MyArray) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC365a858149c6e2d1(w, this)
+	tinyjsonMarshalC866cb397916001e(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MyArray) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC365a858149c6e2d1(lex, this)
+	return tinyjsonUnmarshalC866cb397916001e(lex, this)
 }
 
-func tinyjsonMarshalC380704bb7b4d7c03(w *bytes.Buffer, this *MyExternal) {
+func tinyjsonMarshalC57e9d1860d1d68d8(w *bytes.Buffer, this *MyExternal) {
 	tinyjsonMarshalC39f6f78a15d523b(w, (*externallib.ExternalClass)(this))
 }
 
-func tinyjsonUnmarshalC380704bb7b4d7c03(lex *lexer.Lexer, this *MyExternal) error {
+func tinyjsonUnmarshalC57e9d1860d1d68d8(lex *lexer.Lexer, this *MyExternal) error {
 	tinyjsonUnmarshalC39f6f78a15d523b(lex, (*externallib.ExternalClass)(this))
 	return nil
 }
 
 func (this *MyExternal) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC380704bb7b4d7c03(w, this)
+	tinyjsonMarshalC57e9d1860d1d68d8(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MyExternal) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC380704bb7b4d7c03(lex, this)
+	return tinyjsonUnmarshalC57e9d1860d1d68d8(lex, this)
 }
 
-func tinyjsonMarshalC268447a4189deb99(w *bytes.Buffer, this *MyExternalAlias) {
+func tinyjsonMarshalC380704bb7b4d7c03(w *bytes.Buffer, this *MyExternalAlias) {
 	tinyjsonMarshalC39f6f78a15d523b(w, (*externallib.ExternalClass)(this))
 }
 
-func tinyjsonUnmarshalC268447a4189deb99(lex *lexer.Lexer, this *MyExternalAlias) error {
+func tinyjsonUnmarshalC380704bb7b4d7c03(lex *lexer.Lexer, this *MyExternalAlias) error {
 	tinyjsonUnmarshalC39f6f78a15d523b(lex, (*externallib.ExternalClass)(this))
 	return nil
 }
 
 func (this *MyExternalAlias) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC268447a4189deb99(w, this)
+	tinyjsonMarshalC380704bb7b4d7c03(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MyExternalAlias) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC268447a4189deb99(lex, this)
+	return tinyjsonUnmarshalC380704bb7b4d7c03(lex, this)
 }
 
-func tinyjsonMarshalC2e3108dabb158644(w *bytes.Buffer, this *MyFloat) {
+func tinyjsonMarshalC2606cd2b57d29245(w *bytes.Buffer, this *MyFloat) {
 	w.WriteString(strconv.FormatFloat(float64(*this), 'g', -1, 64))
 }
 
-func tinyjsonUnmarshalC2e3108dabb158644(lex *lexer.Lexer, this *MyFloat) error {
-	v54, err := lex.ReadFloat()
-	*this = MyFloat(v54)
+func tinyjsonUnmarshalC2606cd2b57d29245(lex *lexer.Lexer, this *MyFloat) error {
+	v135, err := lex.ReadFloat()
 	if err != nil {
 		return err
 	}
+	*this = MyFloat(v135)
+
 	return nil
 }
 
 func (this *MyFloat) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC2e3108dabb158644(w, this)
+	tinyjsonMarshalC2606cd2b57d29245(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MyFloat) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC2e3108dabb158644(lex, this)
+	return tinyjsonUnmarshalC2606cd2b57d29245(lex, this)
 }
 
-func tinyjsonMarshalC1a714cf86b83d0e2(w *bytes.Buffer, this *MyInt) {
+func tinyjsonMarshalC4d65822107fcfd52(w *bytes.Buffer, this *MyInt) {
 	w.WriteString(strconv.FormatInt(int64(*this), 10))
 }
 
-func tinyjsonUnmarshalC1a714cf86b83d0e2(lex *lexer.Lexer, this *MyInt) error {
-	v56, err := lex.ReadInt()
-	*this = MyInt(v56)
+func tinyjsonUnmarshalC4d65822107fcfd52(lex *lexer.Lexer, this *MyInt) error {
+	v101, err := lex.ReadInt()
 	if err != nil {
 		return err
 	}
+	*this = MyInt(v101)
+
 	return nil
 }
 
 func (this *MyInt) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC1a714cf86b83d0e2(w, this)
+	tinyjsonMarshalC4d65822107fcfd52(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MyInt) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC1a714cf86b83d0e2(lex, this)
+	return tinyjsonUnmarshalC4d65822107fcfd52(lex, this)
 }
 
-func tinyjsonMarshalC55104dc76695721d(w *bytes.Buffer, this *MyString) {
+func tinyjsonMarshalC365a858149c6e2d1(w *bytes.Buffer, this *MyString) {
 	w.WriteString(strconv.Quote(string(*this)))
 }
 
-func tinyjsonUnmarshalC55104dc76695721d(lex *lexer.Lexer, this *MyString) error {
-	v85, err := lex.ReadString()
+func tinyjsonUnmarshalC365a858149c6e2d1(lex *lexer.Lexer, this *MyString) error {
+	v64, err := lex.ReadString()
 	if err != nil {
 		return err
 	}
-	*this = (MyString)(v85)
+	*this = (MyString)(v64)
 
 	return nil
 }
 
 func (this *MyString) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC55104dc76695721d(w, this)
+	tinyjsonMarshalC365a858149c6e2d1(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MyString) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC55104dc76695721d(lex, this)
+	return tinyjsonUnmarshalC365a858149c6e2d1(lex, this)
 }
 
-func tinyjsonMarshalC25845c95d4491d1b(w *bytes.Buffer, this *MyStringAlias) {
-	tinyjsonMarshalC55104dc76695721d(w, (*MyString)(this))
+func tinyjsonMarshalC1a02070f169c1121(w *bytes.Buffer, this *MyStringAlias) {
+	tinyjsonMarshalC365a858149c6e2d1(w, (*MyString)(this))
 }
 
-func tinyjsonUnmarshalC25845c95d4491d1b(lex *lexer.Lexer, this *MyStringAlias) error {
-	tinyjsonUnmarshalC55104dc76695721d(lex, (*MyString)(this))
+func tinyjsonUnmarshalC1a02070f169c1121(lex *lexer.Lexer, this *MyStringAlias) error {
+	tinyjsonUnmarshalC365a858149c6e2d1(lex, (*MyString)(this))
 	return nil
 }
 
 func (this *MyStringAlias) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC25845c95d4491d1b(w, this)
+	tinyjsonMarshalC1a02070f169c1121(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MyStringAlias) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC25845c95d4491d1b(lex, this)
+	return tinyjsonUnmarshalC1a02070f169c1121(lex, this)
 }
 
-func tinyjsonMarshalC6ec34c367674cb74(w *bytes.Buffer, this *MyUInt16) {
+func tinyjsonMarshalC68255aaf95e94627(w *bytes.Buffer, this *MyUInt16) {
 	w.WriteString(strconv.FormatUint(uint64(*this), 10))
 }
 
-func tinyjsonUnmarshalC6ec34c367674cb74(lex *lexer.Lexer, this *MyUInt16) error {
-	v44, err := lex.ReadInt()
-	*this = MyUInt16(v44)
+func tinyjsonUnmarshalC68255aaf95e94627(lex *lexer.Lexer, this *MyUInt16) error {
+	v124, err := lex.ReadInt()
 	if err != nil {
 		return err
 	}
+	*this = MyUInt16(v124)
+
 	return nil
 }
 
 func (this *MyUInt16) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC6ec34c367674cb74(w, this)
+	tinyjsonMarshalC68255aaf95e94627(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *MyUInt16) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC6ec34c367674cb74(lex, this)
+	return tinyjsonUnmarshalC68255aaf95e94627(lex, this)
 }
 
-func tinyjsonMarshalC3c04951aa42655d9(w *bytes.Buffer, this *SimpleStruct) {
+func tinyjsonMarshalC6e661e92759805f5(w *bytes.Buffer, this *SimpleStruct) {
 	w.WriteString("{")
 	w.WriteString("\"Key1\":")
 	w.WriteString(strconv.Quote(string(this.Key1)))
@@ -869,7 +874,7 @@ func tinyjsonMarshalC3c04951aa42655d9(w *bytes.Buffer, this *SimpleStruct) {
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC3c04951aa42655d9(lex *lexer.Lexer, this *SimpleStruct) error {
+func tinyjsonUnmarshalC6e661e92759805f5(lex *lexer.Lexer, this *SimpleStruct) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -890,18 +895,18 @@ func tinyjsonUnmarshalC3c04951aa42655d9(lex *lexer.Lexer, this *SimpleStruct) er
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "Key1":
-				v37, err := lex.ReadString()
+				v97, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.Key1 = (string)(v37)
+				this.Key1 = (string)(v97)
 
 			case "Key2":
-				v39, err := lex.ReadString()
+				v99, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.Key2 = (string)(v39)
+				this.Key2 = (string)(v99)
 
 			default:
 				lex.SkipValue()
@@ -913,14 +918,14 @@ func tinyjsonUnmarshalC3c04951aa42655d9(lex *lexer.Lexer, this *SimpleStruct) er
 
 func (this *SimpleStruct) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC3c04951aa42655d9(w, this)
+	tinyjsonMarshalC6e661e92759805f5(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *SimpleStruct) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC3c04951aa42655d9(lex, this)
+	return tinyjsonUnmarshalC6e661e92759805f5(lex, this)
 }
 
 func tinyjsonMarshalC2584c47f2cdf5b8a(w *bytes.Buffer, this *StructA1) {
@@ -951,11 +956,11 @@ func tinyjsonUnmarshalC2584c47f2cdf5b8a(lex *lexer.Lexer, this *StructA1) error 
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "a":
-				v34, err := lex.ReadString()
+				v55, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.A = (string)(v34)
+				this.A = (string)(v55)
 
 			default:
 				lex.SkipValue()
@@ -977,7 +982,7 @@ func (this *StructA1) UnmarshalJSON(data []byte) error {
 	return tinyjsonUnmarshalC2584c47f2cdf5b8a(lex, this)
 }
 
-func tinyjsonMarshalC30b95ff183c471d4(w *bytes.Buffer, this *StructA2) {
+func tinyjsonMarshalC1a714cf86b83d0e2(w *bytes.Buffer, this *StructA2) {
 	w.WriteString("{")
 	w.WriteString("\"a\":")
 	w.WriteString(strconv.Quote(string(this.A)))
@@ -987,7 +992,7 @@ func tinyjsonMarshalC30b95ff183c471d4(w *bytes.Buffer, this *StructA2) {
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC30b95ff183c471d4(lex *lexer.Lexer, this *StructA2) error {
+func tinyjsonUnmarshalC1a714cf86b83d0e2(lex *lexer.Lexer, this *StructA2) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -1008,18 +1013,18 @@ func tinyjsonUnmarshalC30b95ff183c471d4(lex *lexer.Lexer, this *StructA2) error 
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "a":
-				v133, err := lex.ReadString()
+				v20, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.A = (string)(v133)
+				this.A = (string)(v20)
 
 			case "c":
-				v135, err := lex.ReadString()
+				v22, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.StructC.C = (string)(v135)
+				this.StructC.C = (string)(v22)
 
 			default:
 				lex.SkipValue()
@@ -1031,24 +1036,24 @@ func tinyjsonUnmarshalC30b95ff183c471d4(lex *lexer.Lexer, this *StructA2) error 
 
 func (this *StructA2) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC30b95ff183c471d4(w, this)
+	tinyjsonMarshalC1a714cf86b83d0e2(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *StructA2) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC30b95ff183c471d4(lex, this)
+	return tinyjsonUnmarshalC1a714cf86b83d0e2(lex, this)
 }
 
-func tinyjsonMarshalC1bf98be2a9d78d73(w *bytes.Buffer, this *StructA3) {
+func tinyjsonMarshalC1408d2ac22c4d294(w *bytes.Buffer, this *StructA3) {
 	w.WriteString("{")
 	w.WriteString("\"a3\":")
 	w.WriteString(strconv.Quote(string(this.A3)))
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC1bf98be2a9d78d73(lex *lexer.Lexer, this *StructA3) error {
+func tinyjsonUnmarshalC1408d2ac22c4d294(lex *lexer.Lexer, this *StructA3) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -1069,11 +1074,11 @@ func tinyjsonUnmarshalC1bf98be2a9d78d73(lex *lexer.Lexer, this *StructA3) error 
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "a3":
-				v10, err := lex.ReadString()
+				v43, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.A3 = (string)(v10)
+				this.A3 = (string)(v43)
 
 			default:
 				lex.SkipValue()
@@ -1085,17 +1090,17 @@ func tinyjsonUnmarshalC1bf98be2a9d78d73(lex *lexer.Lexer, this *StructA3) error 
 
 func (this *StructA3) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC1bf98be2a9d78d73(w, this)
+	tinyjsonMarshalC1408d2ac22c4d294(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *StructA3) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC1bf98be2a9d78d73(lex, this)
+	return tinyjsonUnmarshalC1408d2ac22c4d294(lex, this)
 }
 
-func tinyjsonMarshalC2606cd2b57d29245(w *bytes.Buffer, this *StructA4) {
+func tinyjsonMarshalC3c04951aa42655d9(w *bytes.Buffer, this *StructA4) {
 	w.WriteString("{")
 	w.WriteString("\"a\":")
 	w.WriteString(strconv.Quote(string(this.A)))
@@ -1105,7 +1110,7 @@ func tinyjsonMarshalC2606cd2b57d29245(w *bytes.Buffer, this *StructA4) {
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC2606cd2b57d29245(lex *lexer.Lexer, this *StructA4) error {
+func tinyjsonUnmarshalC3c04951aa42655d9(lex *lexer.Lexer, this *StructA4) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -1126,18 +1131,18 @@ func tinyjsonUnmarshalC2606cd2b57d29245(lex *lexer.Lexer, this *StructA4) error 
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "a":
-				v13, err := lex.ReadString()
+				v80, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.A = (string)(v13)
+				this.A = (string)(v80)
 
 			case "d":
-				v15, err := lex.ReadString()
+				v82, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.StructD.D2 = (string)(v15)
+				this.StructD.D2 = (string)(v82)
 
 			default:
 				lex.SkipValue()
@@ -1149,24 +1154,24 @@ func tinyjsonUnmarshalC2606cd2b57d29245(lex *lexer.Lexer, this *StructA4) error 
 
 func (this *StructA4) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC2606cd2b57d29245(w, this)
+	tinyjsonMarshalC3c04951aa42655d9(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *StructA4) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC2606cd2b57d29245(lex, this)
+	return tinyjsonUnmarshalC3c04951aa42655d9(lex, this)
 }
 
-func tinyjsonMarshalC1a02070f169c1121(w *bytes.Buffer, this *StructA5) {
+func tinyjsonMarshalCc697f48392907a0(w *bytes.Buffer, this *StructA5) {
 	w.WriteString("{")
 	w.WriteString("\"d\":")
 	w.WriteString(strconv.Quote(string(this.StructD.D2)))
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC1a02070f169c1121(lex *lexer.Lexer, this *StructA5) error {
+func tinyjsonUnmarshalCc697f48392907a0(lex *lexer.Lexer, this *StructA5) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -1187,11 +1192,11 @@ func tinyjsonUnmarshalC1a02070f169c1121(lex *lexer.Lexer, this *StructA5) error 
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "d":
-				v42, err := lex.ReadString()
+				v70, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.StructD.D2 = (string)(v42)
+				this.StructD.D2 = (string)(v70)
 
 			default:
 				lex.SkipValue()
@@ -1203,24 +1208,24 @@ func tinyjsonUnmarshalC1a02070f169c1121(lex *lexer.Lexer, this *StructA5) error 
 
 func (this *StructA5) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC1a02070f169c1121(w, this)
+	tinyjsonMarshalCc697f48392907a0(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *StructA5) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC1a02070f169c1121(lex, this)
+	return tinyjsonUnmarshalCc697f48392907a0(lex, this)
 }
 
-func tinyjsonMarshalC6054502fc5d6d268(w *bytes.Buffer, this *StructA6) {
+func tinyjsonMarshalC6ec34c367674cb74(w *bytes.Buffer, this *StructA6) {
 	w.WriteString("{")
 	w.WriteString("\"a\":")
 	w.WriteString(strconv.Quote(string(this.StructB.B)))
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC6054502fc5d6d268(lex *lexer.Lexer, this *StructA6) error {
+func tinyjsonUnmarshalC6ec34c367674cb74(lex *lexer.Lexer, this *StructA6) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -1241,11 +1246,11 @@ func tinyjsonUnmarshalC6054502fc5d6d268(lex *lexer.Lexer, this *StructA6) error 
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "a":
-				v124, err := lex.ReadString()
+				v67, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.StructB.B = (string)(v124)
+				this.StructB.B = (string)(v67)
 
 			default:
 				lex.SkipValue()
@@ -1257,30 +1262,30 @@ func tinyjsonUnmarshalC6054502fc5d6d268(lex *lexer.Lexer, this *StructA6) error 
 
 func (this *StructA6) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC6054502fc5d6d268(w, this)
+	tinyjsonMarshalC6ec34c367674cb74(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *StructA6) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC6054502fc5d6d268(lex, this)
+	return tinyjsonUnmarshalC6ec34c367674cb74(lex, this)
 }
 
-func tinyjsonMarshalC4d65822107fcfd52(w *bytes.Buffer, this *StructA7) {
+func tinyjsonMarshalC268447a4189deb99(w *bytes.Buffer, this *StructA7) {
 	w.WriteString("{")
 	w.WriteString("\"a\":")
 	w.WriteString(strconv.Quote(string(this.StructD.D)))
 	w.WriteString(",")
 	w.WriteString("\"b\":")
-	tinyjsonMarshalC28b621587cb3ad0b(w, (*StructB)(&this.StructB))
+	tinyjsonMarshalC592e17f7b068d9db(w, (*StructB)(&this.StructB))
 	w.WriteString(",")
 	w.WriteString("\"d\":")
 	w.WriteString(strconv.Quote(string(this.StructD.D2)))
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC4d65822107fcfd52(lex *lexer.Lexer, this *StructA7) error {
+func tinyjsonUnmarshalC268447a4189deb99(lex *lexer.Lexer, this *StructA7) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -1301,20 +1306,20 @@ func tinyjsonUnmarshalC4d65822107fcfd52(lex *lexer.Lexer, this *StructA7) error 
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "a":
-				v18, err := lex.ReadString()
+				v46, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.StructD.D = (string)(v18)
+				this.StructD.D = (string)(v46)
 
 			case "b":
-				tinyjsonUnmarshalC28b621587cb3ad0b(lex, (*StructB)(&this.StructB))
+				tinyjsonUnmarshalC592e17f7b068d9db(lex, (*StructB)(&this.StructB))
 			case "d":
-				v21, err := lex.ReadString()
+				v49, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.StructD.D2 = (string)(v21)
+				this.StructD.D2 = (string)(v49)
 
 			default:
 				lex.SkipValue()
@@ -1326,24 +1331,24 @@ func tinyjsonUnmarshalC4d65822107fcfd52(lex *lexer.Lexer, this *StructA7) error 
 
 func (this *StructA7) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC4d65822107fcfd52(w, this)
+	tinyjsonMarshalC268447a4189deb99(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *StructA7) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC4d65822107fcfd52(lex, this)
+	return tinyjsonUnmarshalC268447a4189deb99(lex, this)
 }
 
-func tinyjsonMarshalC28b621587cb3ad0b(w *bytes.Buffer, this *StructB) {
+func tinyjsonMarshalC592e17f7b068d9db(w *bytes.Buffer, this *StructB) {
 	w.WriteString("{")
 	w.WriteString("\"a\":")
 	w.WriteString(strconv.Quote(string(this.B)))
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC28b621587cb3ad0b(lex *lexer.Lexer, this *StructB) error {
+func tinyjsonUnmarshalC592e17f7b068d9db(lex *lexer.Lexer, this *StructB) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -1364,11 +1369,11 @@ func tinyjsonUnmarshalC28b621587cb3ad0b(lex *lexer.Lexer, this *StructB) error {
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "a":
-				v24, err := lex.ReadString()
+				v52, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.B = (string)(v24)
+				this.B = (string)(v52)
 
 			default:
 				lex.SkipValue()
@@ -1378,7 +1383,7 @@ func tinyjsonUnmarshalC28b621587cb3ad0b(lex *lexer.Lexer, this *StructB) error {
 	return nil
 }
 
-func tinyjsonMarshalC6e661e92759805f5(w *bytes.Buffer, this *StructInStruct) {
+func tinyjsonMarshalC56ec3f2525632186(w *bytes.Buffer, this *StructInStruct) {
 	w.WriteString("{")
 	w.WriteString("\"Key1\":")
 	w.WriteString("{")
@@ -1388,7 +1393,7 @@ func tinyjsonMarshalC6e661e92759805f5(w *bytes.Buffer, this *StructInStruct) {
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC6e661e92759805f5(lex *lexer.Lexer, this *StructInStruct) error {
+func tinyjsonUnmarshalC56ec3f2525632186(lex *lexer.Lexer, this *StructInStruct) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -1429,11 +1434,11 @@ func tinyjsonUnmarshalC6e661e92759805f5(lex *lexer.Lexer, this *StructInStruct) 
 						lex.Actions = lex.Actions[2:]
 						switch key {
 						case "Key2":
-							v121, err := lex.ReadString()
+							v133, err := lex.ReadString()
 							if err != nil {
 								return err
 							}
-							this.Key1.Key2 = (string)(v121)
+							this.Key1.Key2 = (string)(v133)
 
 						default:
 							lex.SkipValue()
@@ -1450,17 +1455,17 @@ func tinyjsonUnmarshalC6e661e92759805f5(lex *lexer.Lexer, this *StructInStruct) 
 
 func (this *StructInStruct) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC6e661e92759805f5(w, this)
+	tinyjsonMarshalC56ec3f2525632186(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *StructInStruct) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC6e661e92759805f5(lex, this)
+	return tinyjsonUnmarshalC56ec3f2525632186(lex, this)
 }
 
-func tinyjsonMarshalC430c8b35bb9457d8(w *bytes.Buffer, this *TaggedStruct) {
+func tinyjsonMarshalC28b621587cb3ad0b(w *bytes.Buffer, this *TaggedStruct) {
 	w.WriteString("{")
 	w.WriteString("\"key_1\":")
 	w.WriteString(strconv.Quote(string(this.Key1)))
@@ -1470,7 +1475,7 @@ func tinyjsonMarshalC430c8b35bb9457d8(w *bytes.Buffer, this *TaggedStruct) {
 	w.WriteString("}")
 }
 
-func tinyjsonUnmarshalC430c8b35bb9457d8(lex *lexer.Lexer, this *TaggedStruct) error {
+func tinyjsonUnmarshalC28b621587cb3ad0b(lex *lexer.Lexer, this *TaggedStruct) error {
 	data := lex.Data()
 	if lex.Controls[0] == lexer.Nil {
 		return nil
@@ -1491,18 +1496,18 @@ func tinyjsonUnmarshalC430c8b35bb9457d8(lex *lexer.Lexer, this *TaggedStruct) er
 			lex.Actions = lex.Actions[2:]
 			switch key {
 			case "key_1":
-				v101, err := lex.ReadString()
+				v25, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.Key1 = (string)(v101)
+				this.Key1 = (string)(v25)
 
 			case "key_2":
-				v103, err := lex.ReadString()
+				v27, err := lex.ReadString()
 				if err != nil {
 					return err
 				}
-				this.Key2 = (string)(v103)
+				this.Key2 = (string)(v27)
 
 			default:
 				lex.SkipValue()
@@ -1514,12 +1519,12 @@ func tinyjsonUnmarshalC430c8b35bb9457d8(lex *lexer.Lexer, this *TaggedStruct) er
 
 func (this *TaggedStruct) MarshalJSON() ([]byte, error) {
 	w := bytes.NewBuffer(nil)
-	tinyjsonMarshalC430c8b35bb9457d8(w, this)
+	tinyjsonMarshalC28b621587cb3ad0b(w, this)
 	return w.Bytes(), nil
 }
 
 func (this *TaggedStruct) UnmarshalJSON(data []byte) error {
 	lex := lexer.NewLexer(data)
 	lex.Parse()
-	return tinyjsonUnmarshalC430c8b35bb9457d8(lex, this)
+	return tinyjsonUnmarshalC28b621587cb3ad0b(lex, this)
 }
